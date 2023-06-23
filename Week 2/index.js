@@ -43,6 +43,14 @@ function handleFirstRequest(req, res) {
   res.status(200).send(answerObject);
 }
 
+function givePage(req, res) {
+  res.send(`
+    <h1>Hi</h1>
+    <h2>RISHON</h2>
+  `);
+}
+
+app.get("/", givePage);
 app.post("/handleSum", handleFirstRequest);
 
 function createUser(req, res) {}
