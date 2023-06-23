@@ -14,22 +14,33 @@ app.use(bodyParser.json()); // this extracts the body
 
 function sum(counter) {
   var sum = 0;
-  for (var i = 0; i < counter; i++) {
+  for (var i = 0; i <= counter; i++) {
     sum = sum + i;
   }
   return sum;
 }
 
+function mul(counter) {
+  var ans = 1;
+  for (var i = 1; i <= counter; i++) {
+    ans = ans * i;
+  }
+  return ans;
+}
+
 function handleFirstRequest(req, res) {
   console.log(req.body);
   var counter = req.body.counter;
-  if (counter < 100000) {
-    var calSum = sum(counter);
-    var ans = "this sum is " + calSum;
-    res.send(ans);
-  } else {
-    res.status(411).send("You have sent very big number");
-  }
+
+  var calSum = sum(counter);
+  var calMul = mul(counter);
+
+  var answerObject = {
+    sum: calSum,
+    mul: calMul,
+  };
+
+  res.status(200).send(answerObject);
 }
 
 app.post("/handleSum", handleFirstRequest);
