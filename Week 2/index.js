@@ -30,7 +30,7 @@ function mul(counter) {
 
 function handleFirstRequest(req, res) {
   console.log(req.body);
-  var counter = req.body.counter;
+  var counter = req.query.counter;
 
   var calSum = sum(counter);
   var calMul = mul(counter);
@@ -51,7 +51,7 @@ function givePage(req, res) {
 }
 
 app.get("/", givePage);
-app.post("/handleSum", handleFirstRequest);
+app.get("/handleSum", handleFirstRequest);
 
 function createUser(req, res) {}
 
@@ -60,6 +60,3 @@ app.post("/createUser", createUser);
 app.listen(port, () => {
   console.log(`Port started at ${port}`);
 });
-
-// var calculatedSum = sum(100);
-// console.log(calculatedSum);
