@@ -32,6 +32,9 @@
 const express = require("express");
 const PORT = 3000;
 const app = express();
+var bodyParser = require("body-parser");
+
+app.use(bodyParser.json()); // this extracts the body
 
 let users = [];
 
@@ -55,18 +58,22 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const { email, password } = req.body;
+  const { userName, password } = req.body;
 
   const user = users.find(
-    (user) => user.email === email && user.password === password
+    (user) => user.userName === userName && user.password === password
   );
 
   if (!user) {
-    return res.status(401).send();
+    return res.status(401).send("already exist");
   }
 
   const { firstName, lastName } = user;
-  res.json({ email, firstName, lastName });
+  res.json({ userName, firstName, lastName });
+});
+
+app.listen(PORT, () => {
+  console.log(`Port started at ${PORT}`);
 });
 
 module.exports = app;
