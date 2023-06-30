@@ -8,6 +8,26 @@
   <script>
     function todoCallBack(data) {
       console.log(data);
+      //sending the data to backend
+      var parentElement = document.getElementById("mainArea");
+      // parentElement.innerHTML = JSON.stringify(data);
+      for (var i = 0; i < data.length; i++) {
+        var childElement = document.createElement("div");
+        var grandChildElement1 = document.createElement("span");
+        grandChildElement1.innerHTML = data[i].title;
+
+        var grandChildElement2 = document.createElement("span");
+        grandChildElement2.innerHTML = data[i].description;
+
+        var grandChildElement3 = document.createElement("button");
+        grandChildElement3.innerHTML = "Delete ";
+
+        childElement.append(grandChildElement1);
+        childElement.append(grandChildElement2);
+        childElement.append(grandChildElement3);
+
+        parentElement.append(childElement);
+      }
     }
 
     function callback2(resp) {
@@ -52,8 +72,6 @@
     Todo Description
     <input type="text" id="description" />
     <button onclick="onPress()">Send todo</button>
-    <div>
-      <span></span>
-    </div>
+    <div id="mainArea"></div>
   </body>
 </html>
